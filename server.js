@@ -1,6 +1,6 @@
 const app = require("./app");
 
-const PORT = 3055;
+const PORT = process.env.PORT || 3000;
 const serrver = app.listen(PORT, () => {
   console.log(`WSV eCommerce is running on port ${PORT}`);
 });
