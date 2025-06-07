@@ -1,5 +1,5 @@
 'use strict'
-
+const AccessService = require('../services/access.service.js'); // Importing the AccessService
 class AccessController {
     constructor() {
         // Initialize any properties or dependencies here if needed
@@ -8,13 +8,7 @@ class AccessController {
     signUp = async (req, res, next) => {
         try {
             console.log("Sign Up request received:", req.body);
-            return res.status(200).json({
-                code: 20001,
-                message: "Sign Up successful",
-                metadata: {
-                    userid: 1, // Assuming req.body contains user data
-                },
-            });
+            return res.status(200).json(await AccessService.signUp(req.body));
         } catch (error) {
             console.error("Error during sign up:", error);  
         }

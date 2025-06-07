@@ -1,4 +1,3 @@
-require("dotenv").config();
 const compression = require("compression");
 const express = require("express");
 const { default: helmet } = require("helmet");
@@ -12,11 +11,12 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(compression());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // init database
 require("./src/databases/init.mongodb.js");
-const {checkOverLoad} = require("./src/helpers/check.connect.js");
-checkOverLoad();
+// const {checkOverLoad} = require("./src/helpers/check.connect.js");
+// checkOverLoad();
 
 // init routes
 app.use("/", require("./src/routes/index.js"));

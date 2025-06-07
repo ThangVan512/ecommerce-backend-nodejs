@@ -2,22 +2,22 @@
 
 const { Schema, model } = require("mongoose");
 
-const DOUCMENT_NAME = "Shop";
-const COLLECTION_NAME = "shops";
+const DOCUMENT_NAME = "Shop";
+const COLLECTION_NAME = "Shops";
 
 const shopSchema = new Schema(
     {
     name: {
         type: String,
         trim: true,
-        maxlength: 150, // Limit the length of the shop name
+        maxLength: 150, // Limit the length of the shop name
     },
     email: {
         type: String,
         unique: true,
         trim: true,
     },
-    passsword: {
+    password: {
         type: String,
         required: true,
     },
@@ -43,4 +43,4 @@ const shopSchema = new Schema(
 
 
 //Export the model
-module.exports = model(DOUCMENT_NAME, shopSchema);
+module.exports = model(DOCUMENT_NAME, shopSchema);
