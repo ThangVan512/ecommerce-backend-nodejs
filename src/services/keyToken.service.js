@@ -5,13 +5,14 @@ class KeyTokenService {
         // Initialize any properties or dependencies here if needed
     }
 
-    static createKeyToken = async ({ user, publicKey }) => {
+    static createKeyToken = async ({ user, publicKey, privateKey }) => {
         try {
             // Create a new key token document
             const publicKeyString = publicKey.toString();  
             const newKeyToken = await keyTokenModel.create({
                 user: user,
                 publicKey: publicKeyString, // Ensure publicKey is a string
+                privateKey: privateKey, // Ensure privateKey is a string
             });
             return newKeyToken? newKeyToken.publicKey : null;
         } catch (error) {

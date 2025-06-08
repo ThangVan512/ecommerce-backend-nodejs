@@ -9,6 +9,10 @@ var keyTokenSchema = new Schema({
         ref: 'Shop', // Reference to the Shop model
         required: true // Ensure that user is always provided
     },
+    privateKey: {
+        type: String,   // Private key for the user 
+        required: true, // Ensure that privateKey is always provided
+    },
     publicKey: {
         type: String,   // Public key for the user
         required: true, // Ensure that publicKey is always provided
