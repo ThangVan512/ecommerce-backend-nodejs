@@ -6,10 +6,11 @@ const crypto = require("node:crypto"); // Import crypto for generating keys
 const KeyTokenService = require("./keyToken.service");
 const { createTokenPair } = require("../auths/authUtils");
 const { getInfoData } = require("../utils/index"); // Import utility function for data extraction
-const { BadRequestError, UnauthorizedError } = require("../core/error.response"); // Import custom error class for handling bad requests
-
+const { BadRequestError, UnauthorizedError, ForbiddenError } = require("../core/error.response"); // Import custom error class for handling bad requests
+const verifyJWT = require("../auths/authUtils").verifyJWT; // Import the verifyJWT function for token verification
 //Service for handling access-related operations
 const {findByEmail} = require("./shop.service"); // Importing the findByEmail function from shop.service
+const keytokenModel = require("../models/keytoken.model");
 const RoleShop = {
   WRITER: "WRITER",
   SHOP: "SHOP",
@@ -128,6 +129,69 @@ class AccessService {
     const delKey = await KeyTokenService.removeKeyById(keyStore._id);
     console.log("Key token deleted:", delKey);
     return delKey; // Return the deleted key token
+  }
+
+  static handlerRefreshToken = async ({ refreshToken }) => {
+    // Validate the refresh token
+    if (!refreshToken) {
+      throw new BadRequestError("Refresh token is required.");
+    }
+    // Find the key token associated with the refresh token
+    const foundToken = await KeyTokenService.findKeyByRefreshTokenUsed(refreshToken);
+     if(foundToken) {
+      const { userId, email } = await verifyJWT(
+        refreshToken,
+        foundToken.privateKey
+      );
+      await KeyTokenService.deleteKeyById(userId); // Delete the key token
+      throw new ForbiddenError("Refresh token has been used. Please login again.");
+     }
+    // Find the key token by user ID
+    const holderToken = await KeyTokenService.findKeyByRefreshToken(refreshToken);
+    if (!holderToken) {
+      throw new BadRequestError("Invalid refresh token.");
+    }
+    // Verify the refresh token
+    const { userId, email, role } = await verifyJWT(
+      refreshToken,
+      holderToken.privateKey
+    );
+    if (!userId || !email) {
+      throw new UnauthorizedError("Invalid refresh token.");
+    }
+    const foundShop = await shopModel.findByEmail(email).lean();
+    if (!foundShop) {
+      throw new UnauthorizedError("Shop not found.");
+    }
+    // Create new token pair using the public key
+    const token = await createTokenPair(
+      { user: foundShop._id, email: foundShop.email, role: foundShop.role }, 
+      holderToken.privateKey,
+      holderToken.publicKey
+    );
+    //update the refresh token in the key token model
+    await holderToken.updateOne({
+      $set: {
+        refreshToken: token.refreshToken, // Update the refresh token
+      },
+      $addToSet: {
+        refreshTokenUsed: refreshToken, // Add the used refresh token to the array
+      },
+    });
+    return {
+      code: 20000,
+      message: "Refresh token successful",
+      metadata: {
+        shop: getInfoData({
+          fields: ["_id", "name", "email", "role"],
+          object: foundShop,
+        }),
+        accessToken: accessToken,
+        refreshToken: newRefreshToken, // Return the newly generated refresh token
+      },
+      status: "success",
+    };
+
   }
 }
 

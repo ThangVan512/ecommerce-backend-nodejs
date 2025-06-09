@@ -49,7 +49,36 @@ class KeyTokenService {
 
   static removeKeyById = async (keyId) => {
     return await keyTokenModel.findByIdAndDelete(keyId);
-  }
+  };
+
+  static findKeyByRefreshTokenUsed = async (refreshTokenUsed) => {
+    return await keyTokenModel
+      .findOne({
+        refreshTokenUsed: { $in: [refreshTokenUsed] },
+      })
+      .lean();
+  };
+
+  static findKeyByRefreshToken = async (refreshToken) => {
+    return await keyTokenModel.findOne({ refreshToken }).lean();
+  };
+
+  static deleteKeyById = async (keyId) => {
+    try {
+      if (!Types.ObjectId.isValid(keyId)) {
+        throw new Error("Invalid key ID format");
+      }
+      const deletedKey = await keyTokenModel.findByIdAndDelete(
+        new Types.ObjectId(keyId)
+      );
+      if (!deletedKey) {
+        throw new Error("Key not found or already deleted");
+      }
+      return deletedKey;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 module.exports = KeyTokenService;
