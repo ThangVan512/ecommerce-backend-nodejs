@@ -17,9 +17,13 @@ var keyTokenSchema = new Schema({
         type: String,   // Public key for the user
         required: true, // Ensure that publicKey is always provided
     },
+    refreshTokenUsed: {
+        type: Array,   // Array to store used refresh tokens
+        default: [],   // Default to an empty array if no used tokens are provided
+    },
     refreshToken: {
-        type: Array,   // Refresh token for the user
-        default: [],   // Default to an empty array if no refresh tokens are provided
+        type: String,   // Refresh token for the user
+        required: true, // Ensure that refreshToken is always provided
     },  
     createdAt: {
         type: Date,

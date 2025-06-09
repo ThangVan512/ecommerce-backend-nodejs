@@ -3,6 +3,7 @@
 ### Sign up
 POST {{url_dev}}/shop/signup
 Content-Type: application/json
+x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
 
 {
   "name": "Shop Tips",
@@ -10,3 +11,19 @@ Content-Type: application/json
   "password": "abc123"
 }
 
+### Sign in
+POST {{url_dev}}/shop/login
+Content-Type: application/json 
+x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
+
+{
+  "email": "shoptipjs@gmail.com",
+  "password": "abc123"
+}
+
+### Sign out
+POST {{url_dev}}/shop/logout
+Content-Type: application/json
+x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
+x-client-id: 68469b9dd6486f686ea11b15
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4NmY2ODZlYTExYjE1IiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDU3ODI2LCJleHAiOjE3NDk0NjE0MjZ9.bCypHnDGj2aevUMJZDHSKLdp4EEF2zzmk_CFIhEJft8
