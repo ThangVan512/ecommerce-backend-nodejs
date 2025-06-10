@@ -6,13 +6,19 @@ class AccessController {
     // Initialize any properties or dependencies here if needed
   }
 
+  handlerRefreshToken = async (req, res, next) => {
+    new OKResponse({
+      message: "Get token successful",
+      metadata: await AccessService.handlerRefreshToken(req.body.refreshToken),
+    }).send(res);
+  };
   logout = async (req, res, next) => {
-  new OKResponse({
-    message: "Logout successful",
-    metadata: await AccessService.logout({ keyStore: req.keyStore }),
-  }).send(res);
-}
-  
+    new OKResponse({
+      message: "Logout successful",
+      metadata: await AccessService.logout({ keyStore: req.keyStore }),
+    }).send(res);
+  };
+
   login = async (req, res, next) => {
     const { email, password } = req.body; // Destructuring email and password from request body
     if (!email || !password) {

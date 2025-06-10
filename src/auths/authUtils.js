@@ -73,8 +73,8 @@ const authentication = asyncHandler(async (req, res, next) => {
 const verifyJWT = async (token, keySecret) => {
   try {
     // Verify the JWT token using the provided public key
-    const decoded = JWT.verify(token, keySecret);
-    return decoded; // Return the decoded token if verification is successful
+    console.log("Verifying JWT:", token);
+    return await JWT.verify(token, keySecret);
   } catch (error) {
     console.error("JWT verification failed:", error);
     throw new UnauthorizedError("Unauthorized: Invalid JWT token"); // Throw an error if verification fails
@@ -86,4 +86,5 @@ const verifyJWT = async (token, keySecret) => {
 module.exports = {
   createTokenPair, // Export the createTokenPair function for use in other modules
   authentication, // Export the authentication middleware for use in routes
+  verifyJWT // Export the verifyJWT function for verifying JWT tokens
 };

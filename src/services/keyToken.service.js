@@ -56,25 +56,18 @@ class KeyTokenService {
       .findOne({
         refreshTokenUsed: { $in: [refreshTokenUsed] },
       })
-      .lean();
   };
 
   static findKeyByRefreshToken = async (refreshToken) => {
-    return await keyTokenModel.findOne({ refreshToken }).lean();
+    return await keyTokenModel.findOne({ refreshToken });
   };
 
-  static deleteKeyById = async (keyId) => {
+  static deleteKeyById = async (userId) => {
     try {
-      if (!Types.ObjectId.isValid(keyId)) {
+      if (!Types.ObjectId.isValid(userId)) {
         throw new Error("Invalid key ID format");
       }
-      const deletedKey = await keyTokenModel.findByIdAndDelete(
-        new Types.ObjectId(keyId)
-      );
-      if (!deletedKey) {
-        throw new Error("Key not found or already deleted");
-      }
-      return deletedKey;
+      return await keyTokenModel.deleteOne({ user: new Types.ObjectId(userId) });
     } catch (error) {
       throw error;
     }

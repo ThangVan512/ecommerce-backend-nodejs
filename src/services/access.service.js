@@ -4,10 +4,9 @@ const shopModel = require("../models/shop.model");
 const bcrypt = require("bcryptjs"); // Import bcrypt for password hashing
 const crypto = require("node:crypto"); // Import crypto for generating keys
 const KeyTokenService = require("./keyToken.service");
-const { createTokenPair } = require("../auths/authUtils");
+const { createTokenPair, verifyJWT } = require("../auths/authUtils");
 const { getInfoData } = require("../utils/index"); // Import utility function for data extraction
 const { BadRequestError, UnauthorizedError, ForbiddenError } = require("../core/error.response"); // Import custom error class for handling bad requests
-const verifyJWT = require("../auths/authUtils").verifyJWT; // Import the verifyJWT function for token verification
 //Service for handling access-related operations
 const {findByEmail} = require("./shop.service"); // Importing the findByEmail function from shop.service
 const keytokenModel = require("../models/keytoken.model");
@@ -88,26 +87,17 @@ class AccessService {
     // Generate private key and public key for the shop
     const privateKey = crypto.randomBytes(64).toString("hex"); // Generate a random private key
     const publicKey = crypto.randomBytes(64).toString("hex"); // Generate a random public key
-    const keyStore = await KeyTokenService.createKeyToken({
+    const tokens = await createTokenPair(
+      { user: holderShop._id, email: holderShop.email, role: holderShop.role },
+      privateKey,
+      publicKey
+    ); // Create token pair using the public key
+    await KeyTokenService.createKeyToken({
       user: holderShop._id, // Use the shop's ID
       publicKey, // Ensure publicKey is a string
       privateKey, // Ensure privateKey is a string
-      refreshToken: refreshToken || crypto.randomBytes(64).toString("hex"), // Use provided refresh token or generate a new one
+      refreshToken: tokens.refreshToken, // Use the provided refresh token or the newly generated one
     });
-    if (!keyStore) {
-      throw new BadRequestError("Login failed");
-    }
-    // Convert public key to string
-    const { accessToken, refreshToken: newRefreshToken } =
-      await createTokenPair(
-        {
-          user: holderShop._id,
-          email: holderShop.email,
-          role: holderShop.role,
-        },
-        privateKey,
-        publicKey
-      ); // Create token pair using the public key
     return {
       code: 20000,
       message: "Login successful",
@@ -116,8 +106,7 @@ class AccessService {
           fields: ["_id", "name", "email", "role"],
           object: holderShop,
         }),
-        accessToken: accessToken,
-        refreshToken: refreshToken || newRefreshToken, // Use provided refresh token or the newly generated one
+        tokens
       },
       status: "success",
     };
@@ -131,7 +120,7 @@ class AccessService {
     return delKey; // Return the deleted key token
   }
 
-  static handlerRefreshToken = async ({ refreshToken }) => {
+  static handlerRefreshToken = async ( refreshToken ) => {
     // Validate the refresh token
     if (!refreshToken) {
       throw new BadRequestError("Refresh token is required.");
@@ -139,11 +128,11 @@ class AccessService {
     // Find the key token associated with the refresh token
     const foundToken = await KeyTokenService.findKeyByRefreshTokenUsed(refreshToken);
      if(foundToken) {
-      const { userId, email } = await verifyJWT(
+      const { user, email } = await verifyJWT(
         refreshToken,
         foundToken.privateKey
       );
-      await KeyTokenService.deleteKeyById(userId); // Delete the key token
+      await KeyTokenService.deleteKeyById(user); // Delete the key token
       throw new ForbiddenError("Refresh token has been used. Please login again.");
      }
     // Find the key token by user ID
@@ -152,19 +141,19 @@ class AccessService {
       throw new BadRequestError("Invalid refresh token.");
     }
     // Verify the refresh token
-    const { userId, email, role } = await verifyJWT(
+    const { user, email } = await verifyJWT(
       refreshToken,
       holderToken.privateKey
     );
-    if (!userId || !email) {
+    if (!user || !email) {
       throw new UnauthorizedError("Invalid refresh token.");
     }
-    const foundShop = await shopModel.findByEmail(email).lean();
+    const foundShop = await findByEmail(email)
     if (!foundShop) {
       throw new UnauthorizedError("Shop not found.");
     }
     // Create new token pair using the public key
-    const token = await createTokenPair(
+    const tokens = await createTokenPair(
       { user: foundShop._id, email: foundShop.email, role: foundShop.role }, 
       holderToken.privateKey,
       holderToken.publicKey
@@ -172,7 +161,7 @@ class AccessService {
     //update the refresh token in the key token model
     await holderToken.updateOne({
       $set: {
-        refreshToken: token.refreshToken, // Update the refresh token
+        refreshToken: tokens.refreshToken, // Update the refresh token
       },
       $addToSet: {
         refreshTokenUsed: refreshToken, // Add the used refresh token to the array
@@ -186,8 +175,7 @@ class AccessService {
           fields: ["_id", "name", "email", "role"],
           object: foundShop,
         }),
-        accessToken: accessToken,
-        refreshToken: newRefreshToken, // Return the newly generated refresh token
+        tokens
       },
       status: "success",
     };
