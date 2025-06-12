@@ -39,3 +39,29 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4
   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4NmY2ODZlYTExYjE1IiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzQ5NTM2OTI5LCJleHAiOjE3NTAxNDE3Mjl9.bczS_H-EiAEaedFA7B_7OBi6XfobF2P6BfkV9tiEbXI"
 }
 ###
+POST {{url_dev}}/product
+Content-Type: application/json
+x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
+x-client-id: 68469b9dd6486f686ea11b15
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4NmY2ODZlYTExYjE1IiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzQ5NzIxMTI2LCJleHAiOjE3NDk3MjQ3MjZ9.LmVJRXlQvClE8h73f7xvLt-V1Lmgut9Jp8DGvHrKj20
+
+{
+  "product_name": "New Jean",
+  "product_description": "High quality denim jeans",
+  "product_price": 50,
+  "product_shop": "68469b9dd6486f686ea11b15",
+  "product_type": "Clothing",
+  "product_thumb": "product_thumb",
+  "product_quantity": 5,
+  "product_atributes": [
+    {
+      "brand": "Levi's",
+      "size": "M",
+      "material": "Denim"
+    },
+    {
+      "brand": "Levi's",
+      "size": "L",
+      "material": "Denim"
+    }]
+}

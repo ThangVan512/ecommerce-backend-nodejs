@@ -11,5 +11,5 @@ router.use(apiKey);
 // check permissions
 router.use(permissions(['0000'])); // 0000 is the default permission for all API keys
 router.use('/v1/api', accessRouter);
-
+router.use('/v1/api/product', require('./product')); // Import product routes
 module.exports = router;
