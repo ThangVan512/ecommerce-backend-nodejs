@@ -1,5 +1,6 @@
 "use strict";
 
+const { filter } = require("lodash");
 const {
   product,
   clothing,
@@ -7,6 +8,8 @@ const {
   furniture,
 } = require("../../models/product.model");
 const { Types } = require("mongoose");
+const { getSelectData, unGetSelectData } = require("../../utils");
+
 const findAllDraftForShop = async ({ query, limit, skip }) => {
   return await queryProduct({ query, limit, skip });
 };
@@ -59,6 +62,38 @@ const unPublishProductByShop = async ({ product_shop, productId }) => {
   return modifiedCount;
 };
 
+const findAllProducts = async ({ limit, sort, page, filter, select }) => {
+  const skip = (page - 1) * limit;
+  const sortBy = sort === "ctime" ? { createdAt: -1 } : { updatedAt: -1 };
+  const products = await product
+    .find(filter)
+    .sort(sortBy)
+    .skip(skip)
+    .limit(limit)
+    .select(getSelectData(select))
+    .lean(); // Convert to plain JavaScript objects
+  return products;
+};
+
+const findProduct = async ({ product_id, unselect }) => {
+  if (!Types.ObjectId.isValid(product_id)) return null;
+  return await product
+    .findById(product_id)
+    .select(unGetSelectData(unselect))
+    .lean();
+};
+
+const updateProductById = async ({
+  productId,
+  bodyUpdate,
+  model,
+  isNew = true,
+}) => {
+  return await model.findByIdAndUpdate(productId, bodyUpdate, {
+    new: isNew,
+    runValidators: true,
+  });
+};
 const queryProduct = async ({ query, limit, skip }) => {
   return await product
     .find(query)
@@ -75,4 +110,7 @@ module.exports = {
   findAllPublishForShop,
   unPublishProductByShop,
   searchProductsByUser,
+  findAllProducts,
+  findProduct,
+  updateProductById
 };

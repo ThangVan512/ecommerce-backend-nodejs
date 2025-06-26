@@ -43,27 +43,21 @@ POST {{url_dev}}/product
 Content-Type: application/json
 x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
 x-client-id: 685a4c10845c618878c11632
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwODMyMTc2LCJleHAiOjE3NTA4MzU3NzZ9.UfK7AecJMv7PI_z0LWUT62lTncFd3QmaeueTLl8U9J8
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwOTUxODAzLCJleHAiOjE3NTA5NTU0MDN9.L8T6fJFJ-HHPr3R-VzIVfEEBKivvxwRvs500u8UCS7c
 
 {
-  "product_name": "New Jean",
-  "product_description": "High quality denim jeans",
-  "product_price": 50,
+  "product_name": "Áo thun polo",
+  "product_description": "Áo chất liệu cotton, thoáng mát, phù hợp với mọi lứa tuổi.",
+  "product_price": 129000,
   "product_type": "Clothing",
   "product_thumb": "product_thumb",
-  "product_quantity": 5,
-  "product_attributes": [
+  "product_quantity": 230,
+  "product_attributes": 
     {
-      "brand": "Levi's",
-      "size": "M",
-      "material": "Denim"
-    },
-    {
-      "brand": "Levi's",
-      "size": "L",
-      "material": "Denim"
+      "brand": "Trung Quốc",
+      "size": "XXL",
+      "material": "Cotton"
     }
-    ]
 }
 
 ### Get all draft products
@@ -87,3 +81,37 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVj
 ### Get list search products
 GET {{url_dev}}/product/search/new jean
 x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+
+
+### Find all products
+GET {{url_dev}}/product
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+
+### Find product
+GET {{url_dev}}/product/685b9458480e10b4ca61ba3e
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+
+### Update product
+PATCH {{url_dev}}/product/685b9458480e10b4ca61ba3e
+Content-Type: application/json
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+x-client-id: 685a4c10845c618878c11632
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwOTQ5MjgzLCJleHAiOjE3NTA5NTI4ODN9.aTiRsmIW_KbkuFgKggqvqVzWMXQqW-MWzc0p2iamn7c
+
+{
+ 
+  "product_type": "Clothing",
+  "product_price": null,
+  "product_attributes": [
+    {
+      "brand": "Levi's",
+      "size": "M",
+      "material": null
+    },
+    {
+      "brand": "Levi's",
+      "size": "L",
+      "material": "Denim"
+    }
+    ]
+}
