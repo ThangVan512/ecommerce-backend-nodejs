@@ -3,7 +3,7 @@
 ### Sign up
 POST {{url_dev}}/shop/signup
 Content-Type: application/json
-x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
 
 {
   "name": "Shop Tips",
@@ -14,7 +14,7 @@ x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7
 ### Sign in
 POST {{url_dev}}/shop/login
 Content-Type: application/json 
-x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
 
 {
   "email": "shoptipjs@gmail.com",
@@ -24,16 +24,16 @@ x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7
 ### Sign out
 POST {{url_dev}}/shop/logout
 Content-Type: application/json
-x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
-x-client-id: 68469b9dd6486f686ea11b15
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4NmY2ODZlYTExYjE1IiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDU3ODI2LCJleHAiOjE3NDk0NjE0MjZ9.bCypHnDGj2aevUMJZDHSKLdp4EEF2zzmk_CFIhEJft8
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+x-client-id: 685a4c10845c618878c11632
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwNzQ4MzAyLCJleHAiOjE3NTA3NTE5MDJ9.N1VHN_XTHpPYcR0WCWCCCZjZZEw-VgPu67HbSi6ZjCk
 
 ###
 POST {{url_dev}}/shop/handlerRefreshToken
 Content-Type: application/json
-x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
-x-client-id: 68469b9dd6486f686ea11b15
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4NmY2ODZlYTExYjE1IiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzQ5NTM2OTI5LCJleHAiOjE3NDk1NDA1Mjl9.-eVAF08fWc7S_rrVK4ejkIfV9FE-yUb_QjOCH7fAAiQ
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+x-client-id: 685a4c10845c618878c11632
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwNzQ4MzAyLCJleHAiOjE3NTA3NTE5MDJ9.N1VHN_XTHpPYcR0WCWCCCZjZZEw-VgPu67HbSi6ZjCk
 
 {
   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4NmY2ODZlYTExYjE1IiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzQ5NTM2OTI5LCJleHAiOjE3NTAxNDE3Mjl9.bczS_H-EiAEaedFA7B_7OBi6XfobF2P6BfkV9tiEbXI"
@@ -41,19 +41,18 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4
 ###
 POST {{url_dev}}/product
 Content-Type: application/json
-x-api-key: 0cc4b332e7fdd1ab8148353215d51c369e918a8db66f0de56904004d9edbffd9fd3d7c6855f8fdd48c2ee77ee3ee80f294802001a2ec3f96d82bd7520d83bcfc
-x-client-id: 68469b9dd6486f686ea11b15
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4NmY2ODZlYTExYjE1IiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzQ5NzIxMTI2LCJleHAiOjE3NDk3MjQ3MjZ9.LmVJRXlQvClE8h73f7xvLt-V1Lmgut9Jp8DGvHrKj20
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+x-client-id: 685a4c10845c618878c11632
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwODMyMTc2LCJleHAiOjE3NTA4MzU3NzZ9.UfK7AecJMv7PI_z0LWUT62lTncFd3QmaeueTLl8U9J8
 
 {
   "product_name": "New Jean",
   "product_description": "High quality denim jeans",
   "product_price": 50,
-  "product_shop": "68469b9dd6486f686ea11b15",
   "product_type": "Clothing",
   "product_thumb": "product_thumb",
   "product_quantity": 5,
-  "product_atributes": [
+  "product_attributes": [
     {
       "brand": "Levi's",
       "size": "M",
@@ -63,5 +62,28 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg0NjliOWRkNjQ4
       "brand": "Levi's",
       "size": "L",
       "material": "Denim"
-    }]
+    }
+    ]
 }
+
+### Get all draft products
+GET {{url_dev}}/product/drafts/all
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+x-client-id: 685a4c10845c618878c11632
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwOTA1OTQ1LCJleHAiOjE3NTA5MDk1NDV9.J-AQXh9gDxUkZiQNg3FB7W22eESPaFWsC4KYCWLofio
+
+### publish products
+POST {{url_dev}}/product/publish/685b9458480e10b4ca61ba3e
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+x-client-id: 685a4c10845c618878c11632
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwOTA1OTQ1LCJleHAiOjE3NTA5MDk1NDV9.J-AQXh9gDxUkZiQNg3FB7W22eESPaFWsC4KYCWLofio
+
+### Get all publish products
+GET {{url_dev}}/product/published/all
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95
+x-client-id: 685a4c10845c618878c11632
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjg1YTRjMTA4NDVjNjE4ODc4YzExNjMyIiwiZW1haWwiOiJzaG9wdGlwanNAZ21haWwuY29tIiwiaWF0IjoxNzUwOTA1OTQ1LCJleHAiOjE3NTA5MDk1NDV9.J-AQXh9gDxUkZiQNg3FB7W22eESPaFWsC4KYCWLofio
+
+### Get list search products
+GET {{url_dev}}/product/search/new jean
+x-api-key: a608540aa6cfe0ab7c63def706da45daccf0266843960a4908781ef3e463a6485aa009e6ff3fb68c75126c5f8e1c4c73194a60dc4554a3560d542860d8fefd95

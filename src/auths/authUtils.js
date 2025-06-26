@@ -63,6 +63,7 @@ const authentication = asyncHandler(async (req, res, next) => {
       ); // Throw an error if the user ID in the token does not match
     }
     req.keyStore = keyStore; // Attach the key store to the request object for further use
+    req.user = decodedUser; // Attach the decoded user information to the request object
     next(); // Call the next middleware function if verification is successful
   } catch (error) {
     console.error("Access token verification failed:", error);
