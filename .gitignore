@@ -1,4 +1,4 @@
 node_modules
 .env
 .vscode
-postman
+src/postman/access.post.http
