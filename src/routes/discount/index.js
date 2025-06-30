@@ -4,6 +4,7 @@ const router = express.Router();
 const asyncHandler = require('../../helpers/asyncHandler');
 const { authentication } = require('../../auths/authUtils');
 
+
 // Define routes for discount operations
 router.post('/amount', asyncHandler(discountController.getDiscountAmount)); // Get discount amount
 router.get('/list_product_code', asyncHandler(discountController.getAllDiscountCodesWithProducts)); // Get all discount codes with products

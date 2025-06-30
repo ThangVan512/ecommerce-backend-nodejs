@@ -84,12 +84,6 @@ productSchema.index({ product_slug: 1 }, { unique: true }); // Ensure product_sl
 productSchema.index({ product_shop: 1 }); // Ensure product_shop is indexed
 // Create an index on product_type for faster lookups
 productSchema.index({ product_type: 1 }); // Ensure product_type is indexed
-// Create an index on isDraft for faster queries
-productSchema.index({ isDraft: 1 }); // Ensure isDraft is indexed
-// Create an index on isPublished for faster queries
-productSchema.index({ isPublished: 1 }); // Ensure isPublished is indexed
-// Create an index on isDeleted for faster queries
-productSchema.index({ isDeleted: 1 }); // Ensure isDeleted is indexed
 
 // Middleware to generate product slug before saving
 productSchema.pre("save", function (next) {
